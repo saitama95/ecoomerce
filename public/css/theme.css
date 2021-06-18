@@ -14653,3 +14653,7 @@ section {
     margin-bottom: 10px;
     margin-top: 10px;
 }
+.error_msg {
+    color:red;
+    font-size: 15px;
+}

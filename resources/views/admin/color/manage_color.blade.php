@@ -1,8 +1,11 @@
 @extends('admin.layout')
 
+@section('title')
+    Add color
+@endsection
 @section('content')
-    <h3>Add Category</h3>
-    <a href="{{route('admin.category')}}" class="btn btn-danger mb-10">Back</a>
+    <h3>Add Color</h3>
+    <a href="{{route('admin.color')}}" class="btn btn-danger mb-10">Back</a>
     <div class="card">
         <div class="card-body">
         @if (Session::has('success'))
@@ -10,21 +13,20 @@
             {{Session('success')}}
 		</div>
         @endif
-            <form action="{{route('category.create')}}" method="post" novalidate="novalidate">
+            <form action="{{route('color.create')}}" method="post" novalidate="novalidate">
             @csrf()
                 <div class="form-group">
-                    <label for="cc-payment" class="control-label mb-1">Category</label>
-                    <input id="category" name="name" type="text" class="form-control">
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <span class="error_msg">{{$error}}</span>
-                        @endforeach
-                    @endif
+                    <label for="cc-payment" class="control-label mb-1">Color</label>
+                    <input id="category" name="color" type="text" class="form-control">
                 </div>
-               
+                @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="error_msg">{{$error}}</div>
+                        @endforeach
+                @endif
                 <div>
                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                        Create Category
+                        Create Color
                     </button>
                 </div>
             </form>

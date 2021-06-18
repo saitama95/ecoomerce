@@ -11,7 +11,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Login</title>
+    <title>@yield('title')</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{asset('css/font-face.css')}}" rel="stylesheet" media="all">
@@ -165,13 +165,29 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="has-sub">
+                        <li class="@yield('dashboard_select')">
                             <a class="js-arrow" href="{{route('admin.dashboard')}}">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
-                        <li class="has-sub">
+                        <li class="@yield('category_select')">
                             <a class="js-arrow" href="{{route('admin.category')}}">
-                                <i class="fas fa-tachometer-alt"></i>Category</a>
+                                <i class="fas fa-list"></i>Category</a>
+                        </li>
+                        <li class="@yield('coupan_select')">
+                            <a class="js-arrow" href="{{route('admin.coupan')}}">
+                                <i class="fas fa-tags"></i>Coupan</a>
+                        </li>
+                        <li class="@yield('size_select')">
+                            <a class="js-arrow" href="{{route('admin.size')}}">
+                                <i class="fas fa-window-maximize"></i>Size</a>
+                        </li>
+                        <li class="@yield('color_select')">
+                            <a class="js-arrow" href="{{route('admin.color')}}">
+                            <i class="fas fa-paint-brush"></i>Color</a>
+                        </li>
+                        <li class="@yield('product_select')">
+                            <a class="js-arrow" href="{{route('admin.product')}}">
+                            <i class="fas fa-plus-circle"></i>Product</a>
                         </li>
                     </ul>
                 </nav>

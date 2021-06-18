@@ -1,11 +1,13 @@
 @extends('admin.layout')
-
-@section('category_select')
+@section('title')
+     Size
+@endsection
+@section('size_select')
     active
 @endsection
 @section('content')
-<h3>Category</h3>
-<a href="{{route('manage_category')}}" class="btn btn-success mb-10">Add Category</a>
+<h3>Coupans</h3>
+<a href="{{route('manage_size')}}" class="btn btn-success mb-10">Add Size</a>
   <div class="row m-t-30">
         <div class="col-md-12">
             <!-- DATA TABLE-->
@@ -24,27 +26,27 @@
                     <thead>
                         <tr>
                             <th>S.no</th>
-                            <th>Category</th>
-                            <th>Status</th>
-                            <th>Delete</th>
+                            <th>Size</th>
+                            <th>Status</th> 
                             <th>Edit</th>
+                            <th>Update</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($categorys as $category)
+                    @foreach ($sizes as $size)
                         <tr>
-                            <td>{{$category->id}}</td>
-                            <td>{{$category->name}}</td>
+                            <td>{{$size->id}}</td>
+                            <td>{{$size->size}}</td>
                             <td>
-                                @if ($category->status === 1)
-                                <a href="{{url('admin/category/status/0')}}/{{$category->id}}" class="btn btn-primary">Active</a>
+                                @if ($size->status === 1)
+                                <a href="{{url('admin/size/status/0')}}/{{$size->id}}" class="btn btn-primary">Active</a>
                                 @else
-                                <a href="{{url('admin/category/status/1')}}/{{$category->id}}" class="btn btn-warning">DeActive</a>
+                                <a href="{{url('admin/size/status/1')}}/{{$size->id}}" class="btn btn-warning">DeActive</a>
                                 @endif
                                 
                             </td>
-                            <td><a href="{{route('category.delete',$category->id)}}" class="btn btn-danger">Delete</a></td>
-                            <td><a href="{{route('category.edit',$category->id)}}" class="btn btn-success">Edit</a></td>
+                            <td><a href="{{route('size.delete',$size->id)}}" class="btn btn-danger">Delete</a></td>
+                            <td><a href="{{route('size.edit',$size->id)}}" class="btn btn-success">Edit</a></td>
                         </tr>
                     @endforeach
                         
