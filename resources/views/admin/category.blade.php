@@ -14,10 +14,10 @@
             {{Session('danger')}}
 		    </div>
         @endif
-        @if (Session::has('update'))
-            <div class="alert alert-success" role="alert">
-            {{Session('update')}}
-		    </div>
+        @if (Session::has('message'))
+        <div class="alert alert-success" role="alert">
+            {{Session('message')}}
+		</div>
         @endif
             <div class="table-responsive m-b-40">
                 <table class="table table-borderless table-data3">
@@ -31,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($categorys as $category)
+                    @foreach ($data as $category)
                         <tr>
                             <td>{{$category->id}}</td>
                             <td>{{$category->name}}</td>
@@ -44,7 +44,7 @@
                                 
                             </td>
                             <td><a href="{{route('category.delete',$category->id)}}" class="btn btn-danger">Delete</a></td>
-                            <td><a href="{{route('category.edit',$category->id)}}" class="btn btn-success">Edit</a></td>
+                            <td><a href="{{url('admin/category/manage_category')}}/{{$category->id}}" class="btn btn-success">Edit</a></td>
                         </tr>
                     @endforeach
                         

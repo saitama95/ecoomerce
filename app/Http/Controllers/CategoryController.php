@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-   
     public function status(Request $request,$status,$id)
     {
         $stat = Category::find($id);
@@ -19,66 +18,45 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        return view('admin.category')->with('categorys',Category::all());
+        $result['data'] = Category::all();
+        return view('admin.category',$result);
     }
 
-    public function manage_category()
-    {
-        return view('admin.manage_category');
+    public function manage_category($id='') 
+    {   
+        if($id>0){
+            $arr=Category::where(['id'=>$id])->get();
+            $result['name'] = $arr['0']->name;
+            $result['id'] = $arr['0']->id;
+        }else{
+            $result['name']='';
+            $result['id'] = '';
+        }
+    
+        return view('admin.manage_category',$result);
     }
 
     public function store(Request $request)
     {
+        if($request->id>0){
+            $validate = 'required';
+            $category=Category::find($request->id);
+            $message='Update Successfully';
+        }else{
+            $validate = 'required|unique:categories,name,except,id';
+            $category = new Category();
+            $message='Create Successfully';   
+        }
         $request->validate([
-            'name' =>'required|unique:categories,name,except,id',
+            'name' => $validate
         ]);
-       $category = new Category();
        $category->name = $request->name;
        $category->slug = Str::slug($request->name);
        $category->status = 0;
        $category->save();
-       $request->session()->flash('success', 'Category craete Successfully');
-       return redirect()->back();
+       $request->session()->flash('message', $message);
+       return redirect('admin/category');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $category=Category::find($id);
-        return  view('admin.category_edit')->with('category',$category);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request,$id)
-    {
-        $request->validate([
-            'name' =>'required|unique:categories,name,except,id',
-        ]);
-        $category=Category::find($id);
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-        $category->save();
-        $request->session()->flash('update', 'Category update Successfully');
-        return redirect()->route('admin.category');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request,$id)
     {
         $category=Category::find($id);

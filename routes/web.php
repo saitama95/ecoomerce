@@ -26,13 +26,12 @@ Route::post('admin/auth',[AdminController::class,'auth'])->name('admin.auth');
 
 Route::middleware(['admin_auth'])->group(function () {
     Route::get('admin/dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
-    Route::get('admin/category',[CategoryController::class,'index'])->name('admin.category'); 
+    Route::get('admin/category',[CategoryController::class,'index']);
     Route::get('admin/category/manage_category',[CategoryController::class,'manage_category'])->name('manage_category');
+    Route::get('admin/category/manage_category/{id}',[CategoryController::class,'manage_category']);
     Route::post('admin/category/create',[CategoryController::class,'store'])->name('category.create'); 
     Route::get('admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('category.delete'); 
-    Route::get('admin/category/edit/{id}',[CategoryController::class,'edit'])->name('category.edit'); 
-    Route::post('admin/category/update/{id}',[CategoryController::class,'update'])->name('category.update'); 
-
+    
     Route::get('admin/category/status/{status}/{id}',[CategoryController::class,'status']);
     Route::get('admin/coupan/status/{status}/{id}',[CoupanController::class,'status']);
     Route::get('admin/size/status/{status}/{id}',[SizeController::class,'status']);

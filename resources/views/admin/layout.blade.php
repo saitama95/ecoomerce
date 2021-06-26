@@ -170,7 +170,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                         </li>
                         <li class="@yield('category_select')">
-                            <a class="js-arrow" href="{{route('admin.category')}}">
+                            <a class="js-arrow" href="{{url('admin/category')}}">
                                 <i class="fas fa-list"></i>Category</a>
                         </li>
                         <li class="@yield('coupan_select')">
